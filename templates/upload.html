@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Medical Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #ffffff;
+            color: #2c5454;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .upload-card {
+            background: #ffffff;
+            border: 2px solid #2c5454;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #2c5454;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            letter-spacing: -0.5px;
+        }
+        
+        .file-input-wrapper {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .file-input {
+            width: 100%;
+            padding: 20px;
+            border: 2px dashed #2c5454;
+            border-radius: 8px;
+            background: transparent;
+            font-size: 16px;
+            color: #2c5454;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .file-input:hover {
+            background: rgba(44, 84, 84, 0.05);
+        }
+        
+        .file-input:focus {
+            outline: none;
+            border-color: #2c5454;
+            box-shadow: 0 0 0 3px rgba(44, 84, 84, 0.1);
+        }
+        
+        .upload-btn {
+            background: #2c5454;
+            color: #ffffff;
+            border: none;
+            padding: 16px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .upload-btn:hover {
+            background: #1a3333;
+            transform: translateY(-2px);
+        }
+        
+        .upload-btn:active {
+            transform: translateY(0);
+        }
+        
+        .alert {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #2c5454;
+            background: rgba(44, 84, 84, 0.05);
+            color: #2c5454;
+            font-weight: 500;
+        }
+        
+        .file-hint {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #2c5454;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="upload-card">
+            <h2>Upload Medical Document</h2>
+            <form method="post" enctype="multipart/form-data">
+                <div class="file-input-wrapper">
+                    <input class="file-input" type="file" name="file" required>
+                    <div class="file-hint">Select your medical document file</div>
+                </div>
+                <button class="upload-btn" type="submit">Upload Document</button>
+            </form>
+            
+            <!-- Flask flash messages placeholder -->
+            <div class="alert" style="display: none;" id="flash-message">
+                <!-- Message will appear here -->
+            </div>
+        </div>
+    </div>
+    
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="alert" id="flash-message">
+      {{ messages[0] }}
+    </div>
+  {% endif %}
+{% endwith %}
+</body>
+</html>
