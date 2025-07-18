@@ -3,9 +3,9 @@ __pycache__/
 *.pyo
 *.pyd
 .env
-uploads/
 instance/
 *.db
 *.sqlite3
 .DS_Store
 *.log
+firebase_service_account.json

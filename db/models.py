@@ -1,12 +1,13 @@
-from .database import db
+from sqlalchemy import Column, String, Text, Date, DateTime, JSON
+from db.database import Base
 from datetime import datetime
 
-class MedicalDocument(db.Model):
+class MedicalDocument(Base):
     __tablename__ = 'medical_documents'
-    id = db.Column(db.String(36), primary_key=True)
-    filename = db.Column(db.String(256), nullable=False)
-    doc_type = db.Column(db.String(50), nullable=False)
-    llm_summary = db.Column(db.Text, nullable=True)
-    extracted_data = db.Column(db.JSON, nullable=False)
-    date = db.Column(db.Date, nullable=True)
-    uploaded_at = db.Column(db.DateTime, default=datetime.utcnow)
+    id = Column(String(36), primary_key=True, index=True)
+    filename = Column(String(256), nullable=False)
+    doc_type = Column(String(50), nullable=False)
+    llm_summary = Column(Text, nullable=True)
+    extracted_data = Column(JSON, nullable=False)
+    document_date = Column(Date, nullable=True)
+    uploaded_at = Column(DateTime, default=datetime.utcnow)

@@ -1,7 +1,10 @@
-from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, declarative_base
 
-db = SQLAlchemy()
+DATABASE_URL = "sqlite:///./medvault.db"
 
-def init_db(app):
-    with app.app_context():
-        db.create_all()
+engine = create_engine(
+    DATABASE_URL, connect_args={"check_same_thread": False}
+)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base = declarative_base()

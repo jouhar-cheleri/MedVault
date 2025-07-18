@@ -13,5 +13,5 @@ Return a JSON object:
   "llm_summary": "<brief summary of the document>",
   "extracted_data": { ...fields as above... }
 }
-Return only valid JSON.
+Your response MUST start with ```json and end with ```. Do not include any other text before or after the JSON block.
 """

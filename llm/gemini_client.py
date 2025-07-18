@@ -2,20 +2,18 @@ import os
 import google.generativeai as genai
 from llm.prompts import COMPREHENSIVE_PROMPT
 from PIL import Image
-from flask import current_app
 import tempfile
 
-def extract_document_data(file):
+def extract_document_data(file, api_key):
     print("Starting LLM extraction process...")
 
     # Configure Gemini API key
-    api_key = current_app.config['GEMINI_API_KEY']
     print("Configuring Gemini API key...")
     genai.configure(api_key=api_key)
 
     # Save the uploaded file to a temporary location for PIL
     print("Saving uploaded file to a temporary location...")
-    with tempfile.NamedTemporaryFile(delete=False, suffix=os.path.splitext(file.filename)[1]) as tmp:
+    with tempfile.NamedTemporaryFile(delete=False, suffix=os.path.splitext(getattr(file, 'filename', 'file'))[1]) as tmp:
         file.seek(0)
         tmp.write(file.read())
         tmp_path = tmp.name
@@ -52,10 +50,11 @@ def extract_document_data(file):
     # Try to extract JSON from the response
     print("Extracting JSON from Gemini response...")
     import json, re
-    match = re.search(r'\{.*\}', response.text, re.DOTALL)
+    match = re.search(r'```json\s*(\{.*?\})\s*```', response.text, re.DOTALL)
+
     if match:
         print("Extraction successful.")
-        return json.loads(match.group(0))
+        return json.loads(match.group(1))
     else:
         print("No JSON found in LLM response.")
         raise ValueError("No JSON found in LLM response")

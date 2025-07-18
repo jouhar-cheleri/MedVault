@@ -9,7 +9,7 @@ class Config:
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'pdf'}
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         'DATABASE_URL',
-        'mssql+pyodbc://DESKTOP-TOP2HSI/medvault?driver=ODBC+Driver+17+for+SQL+Server&Trusted_Connection=yes'
+        'sqlite:///medvault.db'
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')

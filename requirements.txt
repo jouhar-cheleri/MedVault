@@ -1,8 +1,9 @@
-flask
-flask_sqlalchemy
+fastapi
+uvicorn
+sqlalchemy
 python-dotenv
-pyodbc
-pymssql
 requests
 Pillow
 google-generativeai
+pdf2image
+pydantic
